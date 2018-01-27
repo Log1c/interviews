@@ -3,19 +3,17 @@ package ua.logic.teamDev;
 import ua.logic.teamDev.states.*;
 
 import javax.naming.OperationNotSupportedException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Context {
     private int indexWhile;
-    private int indexArray;
-    private List<Integer> integers = new ArrayList<>();
-    private String brainFuckString;
-    private int brainFuckIndex;
+    private BrainFuckArray brainFuckArray;
+    private BrainFuckString brainFuckString;
     private String result = "";
 
     public Context(String s) {
-        brainFuckString = s;
+        //TODO change it
+        brainFuckString = new BrainFuckString(s);
+        brainFuckArray = new BrainFuckArray();
     }
 
     State getState(String s) {
@@ -42,37 +40,27 @@ public class Context {
     }
 
     void evaluate() {
-        for (; brainFuckIndex < brainFuckString.length(); brainFuckIndex++) {
-            String current = brainFuckString.substring(brainFuckIndex, brainFuckIndex + 1);
+        for (; brainFuckString.getIndex() < brainFuckString.getLength(); brainFuckString.incrementIndex()) {
+            String current = brainFuckString.getCharacter();
             State state = getState(current);
             state.action(this);
         }
     }
 
     public void decrementIndex() {
-        indexArray--;
+        brainFuckArray.decrementIndex();
     }
 
     public void incrementIndex() {
-        indexArray++;
+        brainFuckArray.incrementIndex();
     }
 
     public void dataIncrement() {
-        Integer i = getElement();
-        integers.set(indexArray, ++i);
+        brainFuckArray.elementIncrement();
     }
 
     public void dataDecrement() {
-        Integer i = getElement();
-        integers.set(indexArray, --i);
-    }
-
-    public Integer getElement() {
-        if (integers.size() == indexArray) {
-            integers.add(0);
-        }
-
-        return integers.get(indexArray);
+        brainFuckArray.elementDecrement();
     }
 
     public void input() {
@@ -84,21 +72,20 @@ public class Context {
     }
 
     public void output() {
-        char c = (char) integers.get(indexArray).intValue();
-        result+=c;
-//        System.out.print(c);
+        result += brainFuckArray.outputElement();
     }
 
     public void jumpForward() {
-        indexWhile = brainFuckIndex;
+        indexWhile = brainFuckString.getIndex();
     }
 
     public void jumpBack() {
-        Integer i = getElement();
+        Integer i = brainFuckArray.getElement();
         if (i != 0) {
-            brainFuckIndex = indexWhile;
+            brainFuckString.setIndex(indexWhile);
         }
     }
+
     public String getResult() {
         return result;
     }
