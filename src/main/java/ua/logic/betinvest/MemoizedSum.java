@@ -38,8 +38,8 @@ public class MemoizedSum {
     static final int MAX_SIZE_CACHE = 3;
     private final static List<Sum> cache = new ArrayList<>(MAX_SIZE_CACHE);
 
-    public static int sum(int arg1, int arg2) {
-        Integer result;
+    public static Double sum(int arg1, int arg2) {
+        Double result;
         Sum sum = new Sum(arg1, arg2);
 
         synchronized (cache) {
@@ -77,7 +77,7 @@ public class MemoizedSum {
 //        }
 //    }
 
-    private synchronized static Integer SearchInCache(Sum sum) {
+    private synchronized static Double SearchInCache(Sum sum) {
         for(Sum s:cache) {
             if (s.equals(sum)) {
                 return s.getResult();

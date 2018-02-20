@@ -1,9 +1,9 @@
 package ua.logic.betinvest;
 
 public class Sum {
-    int arg1;
-    int arg2;
-    Integer result;
+    final int arg1;
+    final int arg2;
+    Double result;
 
     public Sum(int arg1, int arg2) {
         this.arg1 = arg1;
@@ -28,13 +28,15 @@ public class Sum {
         return arg1 + arg2;
     }
 
-    public int getResult() {
-        if (result == null) {
+    public double getResult() {
+        if (result != null) {
+            return result;
+        }
+
 //                try {
 //                    Thread.sleep(3000);
 //                }catch(InterruptedException e){}
-            result = arg1 + arg2;
-        }
+        result = Double.valueOf(arg1 + arg2);
 
         return result;
     }
