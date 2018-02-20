@@ -9,5 +9,6 @@ public class Main {
 
         Context context = new Context(s);
         context.evaluate();
+        System.out.println(context.getResult());
     }
 }

@@ -35,8 +35,8 @@ import java.util.List;
 */
 
 public class MemoizedSum {
-    static final int MAXSIZECACHE = 3;
-    private final static List<Sum> cache = new ArrayList<Sum>(MAXSIZECACHE);
+    static final int MAX_SIZE_CACHE = 3;
+    private final static List<Sum> cache = new ArrayList<>(MAX_SIZE_CACHE);
 
     public static int sum(int arg1, int arg2) {
         Integer result;
@@ -59,7 +59,7 @@ public class MemoizedSum {
                 return result;
             }
 
-            if (cache.size() == MAXSIZECACHE) {
+            if (cache.size() == MAX_SIZE_CACHE) {
                 cache.remove(0);
             }
 
@@ -88,6 +88,14 @@ public class MemoizedSum {
     }
 
     public static void main(String[] args) {
+        sum(1, 1);
+        sum(1, 2);
+        sum(1, 3);
 
+        sum(1, 1);
+        sum(1, 3);
+
+        sum(1, 4);
+        sum(1, 1);
     }
 }
