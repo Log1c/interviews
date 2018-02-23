@@ -1,5 +1,6 @@
 package ua.logic.betinvest;
 
+import java.util.Collections;
 import java.util.Map;
 
 /*
@@ -31,21 +32,22 @@ import java.util.Map;
 
         Все методы в классе java.lang.Math— это превосходные примеры чистых функций.
 
-        HashMap исспользуется
+        HashMap используется
 */
 public class BoundedMemorized {
     private final int MAX_SIZE_CACHE;
     private final Map<Sum, Double> cache;
 
     public BoundedMemorized(int max_size_cache) {
-        cache = new SimpleLRUCache<>(MAX_SIZE_CACHE = max_size_cache);
+//        cache = new SimpleLRUCache<>(MAX_SIZE_CACHE = max_size_cache);
+        cache = Collections.synchronizedMap(new SimpleLRUCache<>(MAX_SIZE_CACHE = max_size_cache));
     }
 
     public Map<Sum, Double> getCache() {
         return cache;
     }
 
-    public synchronized Double sum(int a, int b) {
+    public Double sum(int a, int b) {
         Sum sum = new Sum(a, b);
         Double result = cache.computeIfAbsent(sum, a1 -> {
             System.out.println("cache miss, save to cache");

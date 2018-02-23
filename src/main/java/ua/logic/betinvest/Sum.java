@@ -1,9 +1,9 @@
 package ua.logic.betinvest;
 
 public class Sum {
-    final int arg1;
-    final int arg2;
-    Double result;
+    private final int arg1;
+    private final int arg2;
+    private Double result;
 
     public Sum(int arg1, int arg2) {
         this.arg1 = arg1;
@@ -18,9 +18,8 @@ public class Sum {
         Sum sum = (Sum) o;
 
         if (arg1 != sum.arg1) return false;
-        if (arg2 != sum.arg2) return false;
 
-        return true;
+        return arg2 == sum.arg2;
     }
 
     @Override
@@ -33,10 +32,10 @@ public class Sum {
             return result;
         }
 
-//                try {
-//                    Thread.sleep(3000);
-//                }catch(InterruptedException e){}
-        result = Double.valueOf(arg1 + arg2);
+        try {
+            Thread.sleep(1000);
+        }catch(InterruptedException e){}
+        result = (double) (arg1 + arg2);
 
         return result;
     }
