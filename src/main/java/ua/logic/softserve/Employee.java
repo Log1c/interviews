@@ -14,6 +14,12 @@ public class Employee implements Comparable<Employee>, Serializable {
         this.name = name;
     }
 
+    public Employee(int id, String name, double hourlyRate) {
+        this.id = id;
+        this.name = name;
+        this.hourlyRate = hourlyRate;
+    }
+
     public int getId() {
         return id;
     }
@@ -44,7 +50,7 @@ public class Employee implements Comparable<Employee>, Serializable {
             return getMonthlyRate();
         }
 
-        return 20.8 * 8 * getHourlyRate();
+        return 20.8 * 8 * getHourlyRate();//TODO magic numbers
     }
 
     public boolean isFixedPrice() {
@@ -66,7 +72,7 @@ public class Employee implements Comparable<Employee>, Serializable {
 
         Employee employee = (Employee) o;
 
-        return id != employee.id;
+        return id == employee.id;
     }
 
     @Override
