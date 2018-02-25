@@ -2,6 +2,13 @@ package ua.logic.softserve;
 
 import java.io.*;
 
+/*
+Create classes, which describe employees with hourly wage and fixed payment.
+Give your suggestions about relations between classes. Implement method for calculating the average monthly salary.
+For employees with hourly wage use next formula: “average monthly salary= 20.8*8* hourly rate”,
+ for employees with fixed payment – “average monthly salary= fixed monthly payment”.
+Write well commented code for solving next problems
+*/
 public class Employee implements Comparable<Employee>, SalaryCalculation, Serializable {
     private int id;
     private String name;
