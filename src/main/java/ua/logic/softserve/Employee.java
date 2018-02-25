@@ -2,7 +2,7 @@ package ua.logic.softserve;
 
 import java.io.*;
 
-public class Employee implements Comparable<Employee>, Serializable {
+public class Employee implements Comparable<Employee>, SalaryCalculation, Serializable {
     private int id;
     private String name;
     private boolean fixedPrice;
@@ -45,12 +45,13 @@ public class Employee implements Comparable<Employee>, Serializable {
         return getName().compareTo(employee.getName());
     }
 
+    @Override
     public double getSalary() {
         if(isFixedPrice()) {
             return getMonthlyRate();
         }
 
-        return 20.8 * 8 * getHourlyRate();//TODO magic numbers
+        return WORKDAYS_IN_MONTH * WORKING_HOURS_IN_DAY * getHourlyRate();
     }
 
     public boolean isFixedPrice() {
