@@ -11,7 +11,6 @@ public class Context {
     private String result = "";
 
     public Context(String s) {
-        //TODO change it
         brainFuckString = new BrainFuckString(s);
         brainFuckArray = new BrainFuckArray();
     }
